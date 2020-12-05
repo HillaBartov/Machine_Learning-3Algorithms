@@ -1,0 +1,11 @@
+print("PA ACCURACY:")
+train_x = np.c_[train_x, np.ones(train_size)]
+test_x = np.c_[test_x, np.ones(test_size)]
+for train_index, test_index in kf.split(train_x):
+    # print("TRAIN:", train_index, "TEST:", test_index)
+    X_train, X_test = train_x[train_index], train_x[test_index]
+    y_train, y_test = train_y[train_index], train_y[test_index]
+    pa_yhat = np.array(pa(X_train, y_train))
+    average += metrics.accuracy_score(y_test, pa_yhat)
+    print(metrics.accuracy_score(y_test, pa_yhat))
+print("AVERAGE:", average / 10)
